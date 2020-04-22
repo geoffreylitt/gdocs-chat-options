@@ -1,0 +1,17 @@
+{
+  "name": "GDocs Chat Options",
+  "version": "0.1",
+  "description": "Add preset options to gdocs chat",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "https://docs.google.com/document/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": ["chat.js"]
+}
