@@ -16,6 +16,8 @@ function setup() {
 
   textBox.style.display = "none";
 
+  document.querySelector(".docs-chat-edit-container").style.height = "250px";
+
   function htmlToElement(html) {
     var template = document.createElement('template');
     html = html.trim(); // Never return a text node of whitespace as the result
@@ -34,9 +36,17 @@ function setup() {
 
   var chatOptions = htmlToElement(`
     <div id='chat-options'>
-      <button>I don't understand that code.</button>
-      <button>That code looks too complicated.</button>
-      <button>That code looks slow.</button>
+      <h3>Programmer</h3>
+      <button>Code seems incorrect</button>
+      <button>Code seems poorly designed</button>
+      <button>Code seems inefficient</button>
+      <button>I don’t understand</button>
+      <button>I'm done, it's your turn</button>
+
+      <h3>Synthesizer</h3>
+      <button>Please add another example</button>
+      <button>Please write more code</button>
+      <button>I'm done, it's your turn</button>
     </div>`
   )
 
