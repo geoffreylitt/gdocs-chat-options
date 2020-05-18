@@ -34,37 +34,44 @@ function setup() {
   var chatOptions = htmlToElement(`
     <div>
     <div id='chat-options'>
-      <div id='programmer-options'>
-        <button>✅ Programmer is done, Assistant's turn</button>
-        <button>🏁 I think we're done.</button>
+      <div class="options-tab" id='programmer-options'>
+        <button>🏁 Programmer is done with the task.</button>
       </div>
 
-      <div id='extended-programmer-options' style="display: none;">
+      <div class="options-tab" id='extended-programmer-options' style="display: none;">
         <button>⛔️ Code seems incorrect</button>
         <button>⚠️ Code seems poorly designed</button>
         <button>⚠️ Code seems inefficient</button>
         <button>🤔 I don’t understand</button>
         <button>😀 Thanks, good idea!</button>
-        <button>✅ Programmer is done, Assistant's turn</button>
-        <button>🏁 I think we're done.</button>
+        <button>🏁 Programmer is done with the task.</button>
       </div>
 
-      <div id='synthesizer-options' style="display: none;">
+      <div class="options-tab" id='synthesizer-options' style="display: none;">
+        <button>I have nothing to do, just keep going!</button>
         <button>❓Please add another example</button>
         <button>❓Please write more code</button>
-        <button>🤔 I'm having trouble, can you check our work up to this point?</button>
+        <button>🤔 I don’t understand</button>
         <button>😀 Thanks, good idea!</button>
         <button>⏱ Please wait, still thinking...</button>
         <button>✅ Assistant is done, Programmer's turn</button>
-        <button>🏁 I think we're done.</button>
+        <button>🏁 Assistant is done with the task.</button>
+      </div>
+
+      <div class="options-tab" id='moderator-options' style="display: none;">
+        <button>▶️ New task starting</button>
+        <button>Task is complete.</button>
+        <button>✅ Programmer is done, Assistant's turn</button>
+        <button>🏁 Programmer is done with the task.</button>
       </div>
 
     </div>
 
     <div id="mode-switcher">
-      <a class="active" id='show-programmer-options' href="#" >Simple User</a>
-      <a id='show-extended-programmer-options' href="#" >Extended User</a>
-      <a id='show-synthesizer-options' href="#">Synthesizer</a>
+      <a class="active" id='show-programmer-options' href="#" data-tab="programmer-options">Simple User</a>
+      <a id='show-extended-programmer-options' href="#" data-tab="extended-programmer-options" >Extended User</a>
+      <a id='show-synthesizer-options' href="#" data-tab="synthesizer-options">Synthesizer</a>
+      <a id='show-synthesizer-options' href="#" data-tab="moderator-options">Moderator</a>
     </div>
     </div>
   `
@@ -76,22 +83,12 @@ function setup() {
     button.addEventListener("click", () => { sendChat(button.textContent) });
   })
 
-  document.querySelector('#show-synthesizer-options').addEventListener("click", () => {
-    document.querySelector("#programmer-options").style.display = "none";
-    document.querySelector("#extended-programmer-options").style.display = "none";
-    document.querySelector("#synthesizer-options").style.display = "block";
-  });
-
-  document.querySelector('#show-extended-programmer-options').addEventListener("click", () => {
-    document.querySelector("#programmer-options").style.display = "none";
-    document.querySelector("#synthesizer-options").style.display = "none";
-    document.querySelector("#extended-programmer-options").style.display = "block";
-  });
-
-  document.querySelector('#show-programmer-options').addEventListener("click", () => {
-    document.querySelector("#synthesizer-options").style.display = "none";
-    document.querySelector("#extended-programmer-options").style.display = "none";
-    document.querySelector("#programmer-options").style.display = "block";
+  document.querySelectorAll('#mode-switcher a').forEach(link => {
+    link.addEventListener("click", () => {
+      document.querySelectorAll(".options-tab").forEach(div => div.style.display = "none" )
+      let targetId = link.getAttribute("data-tab")
+      document.getElementById(targetId).style.display = "block";
+    });
   });
 
   document.body.appendChild(
