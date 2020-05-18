@@ -35,7 +35,7 @@ function setup() {
     <div>
     <div id='chat-options'>
       <div id='programmer-options'>
-        <button>✅ I'm done, it's your turn</button>
+        <button>✅ Programmer is done, Assistant's turn</button>
         <button>🏁 I think we're done.</button>
       </div>
 
@@ -45,7 +45,7 @@ function setup() {
         <button>⚠️ Code seems inefficient</button>
         <button>🤔 I don’t understand</button>
         <button>😀 Thanks, good idea!</button>
-        <button>✅ I'm done, it's your turn</button>
+        <button>✅ Programmer is done, Assistant's turn</button>
         <button>🏁 I think we're done.</button>
       </div>
 
@@ -55,7 +55,7 @@ function setup() {
         <button>🤔 I'm having trouble, can you check our work up to this point?</button>
         <button>😀 Thanks, good idea!</button>
         <button>⏱ Please wait, still thinking...</button>
-        <button>✅ I'm done, it's your turn</button>
+        <button>✅ Assistant is done, Programmer's turn</button>
         <button>🏁 I think we're done.</button>
       </div>
 
