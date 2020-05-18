@@ -80,7 +80,10 @@ function setup() {
   textBox.parentElement.appendChild(chatOptions)
 
   document.querySelectorAll('#chat-options button').forEach(button => {
-    button.addEventListener("click", () => { sendChat(button.textContent) });
+    button.addEventListener("click", () => {
+      let message = `${button.textContent}\n(${new Date(Date.now()).toLocaleTimeString()})`
+      sendChat(message)
+    });
   })
 
   document.querySelectorAll('#mode-switcher a').forEach(link => {
