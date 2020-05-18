@@ -32,9 +32,14 @@ function setup() {
   }
 
   var chatOptions = htmlToElement(`
+    <div>
     <div id='chat-options'>
       <div id='programmer-options'>
+        <button>✅ I'm done, it's your turn</button>
+        <button>🏁 I think we're done.</button>
+      </div>
 
+      <div id='extended-programmer-options' style="display: none;">
         <button>⛔️ Code seems incorrect</button>
         <button>⚠️ Code seems poorly designed</button>
         <button>⚠️ Code seems inefficient</button>
@@ -42,15 +47,9 @@ function setup() {
         <button>😀 Thanks, good idea!</button>
         <button>✅ I'm done, it's your turn</button>
         <button>🏁 I think we're done.</button>
-        <div>
-          <a id='show-synthesizer-options' href="#" style="font-size: 10px;">(Show synthesizer options)</a>
-        </div>
       </div>
 
       <div id='synthesizer-options' style="display: none;">
-
-        <h3>Synthesizer control panel</h3>
-
         <button>❓Please add another example</button>
         <button>❓Please write more code</button>
         <button>🤔 I'm having trouble, can you check our work up to this point?</button>
@@ -58,11 +57,17 @@ function setup() {
         <button>⏱ Please wait, still thinking...</button>
         <button>✅ I'm done, it's your turn</button>
         <button>🏁 I think we're done.</button>
-        <div>
-          <a id='show-programmer-options' href="#" style="font-size: 10px;">(Show user options)</a>
-        </div>
       </div>
-    </div>`
+
+    </div>
+
+    <div id="mode-switcher">
+      <a class="active" id='show-programmer-options' href="#" >Simple User</a>
+      <a id='show-extended-programmer-options' href="#" >Extended User</a>
+      <a id='show-synthesizer-options' href="#">Synthesizer</a>
+    </div>
+    </div>
+  `
   )
 
   textBox.parentElement.appendChild(chatOptions)
@@ -73,11 +78,19 @@ function setup() {
 
   document.querySelector('#show-synthesizer-options').addEventListener("click", () => {
     document.querySelector("#programmer-options").style.display = "none";
+    document.querySelector("#extended-programmer-options").style.display = "none";
     document.querySelector("#synthesizer-options").style.display = "block";
+  });
+
+  document.querySelector('#show-extended-programmer-options').addEventListener("click", () => {
+    document.querySelector("#programmer-options").style.display = "none";
+    document.querySelector("#synthesizer-options").style.display = "none";
+    document.querySelector("#extended-programmer-options").style.display = "block";
   });
 
   document.querySelector('#show-programmer-options').addEventListener("click", () => {
     document.querySelector("#synthesizer-options").style.display = "none";
+    document.querySelector("#extended-programmer-options").style.display = "none";
     document.querySelector("#programmer-options").style.display = "block";
   });
 
@@ -104,8 +117,15 @@ function setup() {
           cursor: pointer;
         }
 
-        #show-synthesizer-options {
-          color: #ccc;
+        #mode-switcher {
+          border-top: solid thin #ddd;
+          padding: 5px;
+        }
+
+        #mode-switcher a {
+          color: #aaa;
+          font-size: 12px;
+          margin-right: 10px;
         }
       </style>`))
 
